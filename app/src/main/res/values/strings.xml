@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">RPuppies</string>
     <string name="new_puppy">New Puppy</string>
+    <string name="puppy_proxy_description">Default Puppy</string>
 </resources>
