@@ -1,18 +1,17 @@
-
 package com.example.rpuppies
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.googlecode.flickrjandroid.Flickr
-
+import com.example.rpuppies.PhotoUtils
+import android.util.Log
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var puppyBtn: Button
 
-    var f = Flickr(BuildConfig.FLICKR_API_KEY, BuildConfig.FLICKR_API_SECRET)
+    private lateinit var photoArtifact: PhotoUtils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +25,9 @@ class MainActivity : AppCompatActivity() {
     fun addListenerOnPuppyButton() {
 
         puppyBtn.setOnClickListener {
-            print("New puppy button clicked!")
+            photoArtifact = PhotoUtils()
+            photoArtifact.execute()
+            //Log.d("PuppyPhotoListSize", photoArtifact.getPuppyPhotoList().total.toString())
         }
     }
 }
