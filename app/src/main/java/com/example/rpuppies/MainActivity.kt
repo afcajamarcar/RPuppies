@@ -3,12 +3,16 @@ package com.example.rpuppies
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button;
+import android.widget.Button
+import com.googlecode.flickrjandroid.Flickr
+
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var puppyBtn: Button
+
+    var f = Flickr(BuildConfig.FLICKR_API_KEY, BuildConfig.FLICKR_API_SECRET)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
