@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <ImageView
+        android:id="@+id/animal_photo_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="93dp"
@@ -16,7 +17,8 @@
         android:layout_marginRight="93dp"
         android:layout_marginBottom="289dp"
         android:contentDescription="@string/puppy_proxy_description"
-        android:src="@drawable/puppy_proxy"
+        android:src="@drawable/kitten_proxy"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +34,7 @@
         android:layout_marginEnd="154dp"
         android:layout_marginRight="154dp"
         android:layout_marginBottom="75dp"
-        android:text="@string/new_puppy"
+        android:text="@string/new_cat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

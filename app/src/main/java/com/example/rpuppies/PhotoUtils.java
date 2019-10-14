@@ -5,35 +5,59 @@ import com.googlecode.flickrjandroid.Flickr;
 import com.googlecode.flickrjandroid.photos.PhotoList;
 import com.googlecode.flickrjandroid.photos.SearchParameters;
 
-public class PhotoUtils extends AsyncTask<Void, Void, String> {
+public class PhotoUtils extends AsyncTask<Integer, Void, Void> {
 
     private Flickr f;
 
-    private String baseUrl = "";
-
     private SearchParameters puppyParams;
+
+    private PhotoList puppyPhotoList;
+
+    private final Integer PER_PAGE = 50;
 
     public PhotoUtils() {
         this.f = new Flickr(BuildConfig.FLICKR_API_KEY, BuildConfig.FLICKR_API_SECRET);
         this.puppyParams = new SearchParameters();
     }
 
-    public PhotoList getPuppyPhotoList() {
-        PhotoList puppyPhotoList = null;
-        this.puppyParams.setText("puppies");
+    private void getPuppyPhotoList(Integer page) {
+        this.puppyPhotoList = null;
+        this.puppyParams.setText("kitten");
+        String[] tags = {"kitten","cats", "kittens", "cat"};
+        this.puppyParams.setTags(tags);
         try {
-            puppyPhotoList = this.f.getPhotosInterface().search(this.puppyParams, 50, 1);
-            System.out.println("Total of puppies " + puppyPhotoList.getTotal());
+            this.puppyPhotoList = this.f.getPhotosInterface().search(this.puppyParams, PER_PAGE, page);
         } catch(Exception e){
             e.printStackTrace();
         }
-        return puppyPhotoList;
+    }
+
+    public String getUrl() {
+        int puppyPhotoNumber = generateRandomNumberWithBounds(PER_PAGE);
+        if(puppyPhotoList != null){
+            StringBuilder sb = new StringBuilder("https://farm1.staticflickr.com/");
+            sb.append(puppyPhotoList.get(puppyPhotoNumber).getServer());
+            sb.append("/");
+            sb.append(puppyPhotoList.get(puppyPhotoNumber).getId());
+            sb.append("_");
+            sb.append(puppyPhotoList.get(puppyPhotoNumber).getSecret());
+            sb.append(".jpg");
+            return sb.toString();
+        } else {
+            return "";
+        }
+
+    }
+
+    private Integer generateRandomNumberWithBounds(Integer upperBound){
+        System.out.println("Random number" + Integer.toString((int )(Math.random() * upperBound)));
+        return (int )(Math.random() * upperBound);
     }
 
     @Override
-    protected String doInBackground(Void... voids) {
-
-        return "Total of puppies " + getPuppyPhotoList().getTotal();
-
+    protected Void doInBackground(Integer... pParams) {
+        getPuppyPhotoList(pParams[0]);
+        return null;
     }
+
 }
