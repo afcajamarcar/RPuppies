@@ -20,6 +20,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            buildConfigField 'String', 'FLICKR_API_KEY', FLICKR_API_KEY
+            buildConfigField 'String', 'FLICKR_API_SECRET', FLICKR_API_SECRET
+        }
     }
 }
 
@@ -32,4 +36,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    //implementation files('libs/slf4j-android-1.7.28.jar')
+    implementation files('flickrj-android-2.1.0.jar')
+    implementation 'org.slf4j:slf4j-api:1.7.28'
+    implementation 'com.github.bumptech.glide:glide:4.2.0'
 }
